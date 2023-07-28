@@ -6,10 +6,16 @@ class Producto {
             this.cantidad = cantidad,
             this.imagen = imagen
     }
-    mostrarInfoProducto() {
-        console.log(`El producto ${this.nombre} tiene un precio de ${this.precio}`)
+    sumarUno () {
+        this.cantidad += 1
+        return this.cantidad
     }
-}
+
+    restarUno () {
+        this.cantidad -= 1
+        return this.cantidad
+    }
+    }
 const articulo1 = new Producto(1, "Super Mario Bros.™ Wonder", 61539, 1, "../img/mario_1.png")
 const articulo2 = new Producto(2, "Super Mario™ 3D World + Bowsers Fury", 61539, 1, "../img/mario_2.png")
 const articulo3 = new Producto(3, "Mario Kart™ 8 Deluxe", 34809, 1, "../img/mario_3.png")

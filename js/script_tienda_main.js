@@ -1,16 +1,20 @@
 let productosDiv = document.getElementById("productos")
 let mostrarCatalogo = document.getElementById("mostrarCatalogo")
 let selectOrden = document.getElementById("selectOrden")
-let agregarProductoBtn = document.getElementById("guardarLibroBtn")
+let agregarProductoBtn = document.getElementById("guardarProductoBtn")
 let buscador = document.getElementById("buscador")
 let coincidencia = document.getElementById("coincidencia")
 let modalBodyCarrito = document.getElementById("modal-bodyCarrito")
 let botonCarrito = document.getElementById("botonCarrito")
 let precioTotal = document.getElementById("precioTotal")
 
-let productosEnCarrito
+let productosEnCarrito = []
 if (localStorage.getItem("carrito")) {
-    productosEnCarrito = JSON.parse(localStorage.getItem("carrito"))
+    for(let producto of JSON.parse(localStorage.getItem("carrito"))){
+        let productoStorage = new Producto(producto.id, producto.nombre, producto.precio, producto.cantidad, producto.imagen)
+        productosEnCarrito.push(productoStorage)
+    }
+    console.log(productosEnCarrito)
 } else {
     productosEnCarrito = []
     localStorage.setItem("carrito", productosEnCarrito)
@@ -49,10 +53,10 @@ function agregarAlCarrito(producto) {
         Swal.fire({
             title: `Agregaste un producto al carrito`,
             text: `El videojuego ${producto.nombre} con el precio de: $${producto.precio} ha sido agregado`,
-            confirmButtonColor: "green",
-            confirmButtonText: "Gracias",
+            confirmButtonColor: "blue",
+            confirmButtonText: "Producto agregado al carrito",
             imageUrl: `${producto.imagen}`,
-            imageHeight: 200
+            imageHeight: 382
         })
     } else {
 
@@ -70,16 +74,49 @@ function cargarProductosCarrito(array) {
     array.forEach((productoCarrito) => {
         modalBodyCarrito.innerHTML +=
             `<div class="card border-primary mb-3" id ="productoCarrito${productoCarrito.id}" style="max-width: 540px;">
-                    <img class="card-img-top" height="300px" src="${productoCarrito.imagen}" alt="">
+                    <img class="card-img-top" height="382px" src="${productoCarrito.imagen}" alt="">
                     <div class="card-body">
                     <h4 class="card-title">${productoCarrito.nombre}</h4>
-                        <p class="card-text">$${productoCarrito.precio}</p> 
-                        <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
+                    <p class="card-text">$${productoCarrito.precio}</p>
+                    <p class="card-text">Cantidad: ${productoCarrito.cantidad}</p> 
+                    <p class="card-text">SubTotal: ${productoCarrito.cantidad * productoCarrito.precio}</p>   
+                    <button class= "btn btn-success" id="botonSumarUno${productoCarrito.id}"><i class="fas fa-plus"></i></button>
+                    <button class= "btn btn-danger" id="botonRestarUno${productoCarrito.id}"><i class="fas fa-minus"></i></button> 
+                    <button class= "btn btn-danger" id="botonEliminar${productoCarrito.id}"><i class="fas fa-trash-alt"></i></button>
                     </div>    
                 </div>`
     })
 
     array.forEach((productoCarrito) => {
+        //Sumar unidad
+        document.getElementById(`botonSumarUno${productoCarrito.id}`).addEventListener("click", () => {
+            productoCarrito.sumarUno()
+            console.log(productoCarrito.cantidad)
+            localStorage.setItem("carrito", JSON.stringify(array))
+            cargarProductosCarrito(array)
+        })
+        //Restar unidad
+        document.getElementById(`botonRestarUno${productoCarrito.id}`).addEventListener("click", () => {
+            let cantidadItem = productoCarrito.restarUno()
+            console.log(cantidadItem)
+            if (cantidadItem == 0) {
+                let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
+                cardProducto.remove()
+                let productoEliminar = array.find((producto) => producto.id == productoCarrito.id)
+                console.log(productoEliminar)
+                let posicion = array.indexOf(productoEliminar)
+                console.log(posicion)
+                array.splice(posicion, 1)
+                console.log(array)
+                localStorage.setItem("carrito", JSON.stringify(array))
+                calcularTotal(array)
+            }
+            else {
+                localStorage.setItem("carrito", JSON.stringify(array))
+            }
+            cargarProductosCarrito(array)
+        })
+        //Vaciar carrito
         document.getElementById(`botonEliminar${productoCarrito.id}`).addEventListener("click", () => {
             console.log(`Eliminar producto`)
             let cardProducto = document.getElementById(`productoCarrito${productoCarrito.id}`)
@@ -91,16 +128,14 @@ function cargarProductosCarrito(array) {
             array.splice(posicion, 1)
             console.log(array)
             localStorage.setItem("carrito", JSON.stringify(array))
-
             calcularTotal(array)
         })
     })
     calcularTotal(array)
-
 }
 
 function calcularTotal(array) {
-    let total = array.reduce((acc, productoCarrito) => acc + productoCarrito.precio, 0)
+    let total = array.reduce((acc, productoCarrito) => acc + (productoCarrito.precio * productoCarrito.cantidad), 0)
     total == 0 ? precioTotal.innerHTML = `No hay productos en el carrito` : precioTotal.innerHTML = `El total es <strong>${total}</strong>`
 }
 
@@ -143,16 +178,15 @@ function agregarProducto(array) {
     nombreIngresado.value = ""
     precioIngresado.value = ""
 
-    //Toastify
     Toastify(
         {
             text: `El videojuego ${productoNuevo.nombre} se ha agregado`,
             duration: 3000,
-            gravity: "bottom",//top o buttom,
-            position: "center",//left, right o center
+            gravity: "bottom",
+            position: "center",
             style: {
                 color: "white",
-                background: "green"
+                background: "blue"
             }
         }
     ).showToast()
@@ -202,3 +236,5 @@ buscador.addEventListener("input", () => {
 botonCarrito.addEventListener("click", () => {
     cargarProductosCarrito(productosEnCarrito)
 })
+
+verCatalogo(productos)

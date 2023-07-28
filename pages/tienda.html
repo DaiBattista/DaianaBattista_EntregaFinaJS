@@ -10,24 +10,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;700;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/dc5385c7a1.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <meta name="description"
         content="Tienda online de Super Mario Bros donde podrás comprar todo el merchandaising relacionado con la película y los video juegos">
     <meta name="robots" content="index, follow">
     <title>The Super Mario Bros Movie</title>
 </head>
 
-<body>
+<body style="background-color:rgb(230, 186, 173);">
     <header>
         <input type="checkbox" id="check">
         <label for="check" class="see__menu">
             ≡
         </label>
         <nav class="nav__menu">
-            <a href="../index.html">Home</a>
-            <a href="./sinopsis.html">sinopsis</a>
-            <a href="./personajes.html">personajes</a>
-            <a href="./trailers.html">trailers</a>
-            <a href="./historia.html">historia</a>
+            <a href="../index.html" style="text-decoration: none;">Home</a>
+            <a href="./sinopsis.html" style="text-decoration: none;">sinopsis</a>
+            <a href="./personajes.html" style="text-decoration: none;">personajes</a>
+            <a href="./trailers.html" style="text-decoration: none;">trailers</a>
+            <a href="./historia.html" style="text-decoration: none;">historia</a>
             <a href="#" class="active">tienda</a>
             <label for="check" class="hide__menu">
                 ×
@@ -35,19 +38,99 @@
         </nav>
     </header>
     <main>
-        <section>
-            <figure class="img__personajes">
-                <img src="../img/mario_tienda.jpg" alt="Foto de la tienda de Super Mario Bros en Osaka"
-                    class="img__personaje__cover">
-            </figure>
-        </section>
-        <section class="header__img">
-            <div class="header__text__personajes">
-                <h2>Tienda</h2>
-                <p>Vas a poder descubrir todos los productos disponibles de esta franquicia, desde merchandaising hasta
-                    videojuegos y consolas.</p>
-            </div>
-            <div class="main__tienda">
+        <div class="container" style="border-radius: 16px; padding: 5%;">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="width: 100%; padding: 2%;">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="#">Tienda</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarColor01">
+                        <ul class="navbar-nav me-auto">
+                            <form class="d-flex">
+                                <input id="buscador" class="form-control me-2" placeholder="" aria-label="Search">
+                            </form>
+                            <button id="mostrarCatalogo" class="btn btn-success" style="background-color: #0A66C2">Ver
+                                juegos</button>
+                        </ul>
+                    </div>
+                </div>
+
+                <ul>
+                    <select id="selectOrden" class="form-select form-select-sm" aria-label=".form-select-sm example">
+                        <option selected>Ordenar por:</option>
+                        <option value="1">Mayor a menor</option>
+                        <option value="2">Menor a mayor</option>
+                        <option value="3">Alfabeticamente</option>
+                    </select>
+                </ul>
+
+                <ul style="list-style: none;" className="navbar-nav me-auto">
+                    <li className="nav-item ">
+                        <a id="botonCarrito" data-bs-toggle="modal" data-bs-target="#idModalCarrito"
+                            class="btn btn-secondary"><i class="fas fa-shopping-cart fa-1x"></i></a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="container">
+                <div id="coincidencia"></div>
+                <div id="productos" class="row"></div>
+
+                <div class="modal fade" id="idModalCarrito" tabindex="-1" aria-labelledby="exampleModalLabel"
+                    aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Carrito de Compras</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body" id="modal-bodyCarrito">
+                            </div>
+                            <div class="row ml-ato">
+                                <p id="precioTotal"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button type="button" data-bs-dismiss="modal" class="btn btn-success"
+                                    id="botonFinalizarCompra">Finalizar Compra</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="sinopsis__personajes">
+                    <div class="sinopsis__personajes__info">
+                        <h3
+                            style="font-size: 1.8rem; font-family: 'Poppins', sans-serif; font-weight: 700; color: #0A66C2; overflow: hidden;">
+                            ¿Sos administrador? Agrega más videojuegos</h3>
+
+                        <form id="formAgregarCarrito" class="col-lg-6 m-5">
+                            <div class="mb-3">
+                                <label for="Nombre" class="form-label">Nombre</label>
+                                <input type="text" class="form-control" id="nombreInput" aria-describedby="nombre">
+
+                            </div>
+                            <div class="mb-3">
+                                <label for="precio" class="form-label">Precio:</label>
+                                <input type="text" class="form-control" id="precioInput" aria-describedby="precio">
+
+                            </div>
+                            <div>
+                                <button type="text" id="guardarLibroBtn" class="btn btn-success">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="sinopsis__personajes__img">
+                        <figure>
+                            <img src="../img/play_bowser.png" alt="Personajes de la pelicula" class="personajes__img">
+                        </figure>
+                    </div>
+                </div>
 
             </div>
     </main>
@@ -55,7 +138,7 @@
         <div class="container__info">
             <div class="container__info__row">
                 <div class="footer__col">
-                    <h4>¡Naveguemos!</h4>
+                    <h4 style="font-size: 0.9rem; overflow: hidden;">¡Naveguemos!</h4>
                     <ul>
                         <li><a href="../index.html">Home</a></li>
                         <li><a href="./sinopsis.html">Sinopsis</a></li>
@@ -66,7 +149,7 @@
                     </ul>
                 </div>
                 <div class="footer__col">
-                    <h4>Redes sociales</h4>
+                    <h4 style="font-size: 0.9rem; overflow: hidden;">Redes sociales</h4>
                     <div class="social-links">
                         <a href="https://www.facebook.com/supermariomovie/"><i class="fa-brands fa-facebook-f"></i></a>
                         <a href="https://twitter.com/supermariomovie"><i class="fa-brands fa-twitter"></i></a>
@@ -74,7 +157,7 @@
                     </div>
                 </div>
                 <div class="footer__col">
-                    <h4>Copyrigths</h4>
+                    <h4 style="font-size: 0.9rem; overflow: hidden;">Copyrigths</h4>
                     <p>
                         Game trademarks and copyrights are properties of their respective owners. Nintendo
                         properties are trademarks of Nintendo. © 2020 Nintendo.
@@ -83,5 +166,19 @@
             </div>
         </div>
     </footer>
-    <script src="../js/script_tienda.js"></script>
+    <!--Script de Bootstrap-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous">
+        </script>
+    <!--Script Sweet alert-->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!--Toastify-->
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <!--Luxon-->
+    <script src="https://cdn.jsdelivr.net/npm/luxon@2.3.0/build/global/luxon.min.js"></script>
+
+
+    <script src="../js/script_tienda_class.js"></script>
+    <script src="../js/script_tienda_main.js"></script>
+
 </body>

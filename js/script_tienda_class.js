@@ -22,7 +22,7 @@ const cargarProductos = async () => {
     const data = await res.json()
     console.log(data)
     for(let producto of data) {
-        let productoData = new Producto(producto.id, producto.nombre, producto.cantidad, producto.imagen)
+        let productoData = new Producto(producto.id, producto.nombre, producto.precio, producto.cantidad, producto.imagen)
         productos.push(productoData)
     }
     localStorage.setItem("productos", JSON.stringify(productos))

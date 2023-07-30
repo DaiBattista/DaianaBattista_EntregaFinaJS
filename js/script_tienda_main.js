@@ -16,10 +16,10 @@ function verCatalogo(array) {
     for (let producto of array) {
         let cargaProductoDiv = document.createElement("div");
         cargaProductoDiv.className = "col-12 col-md-6 col-lg-4 my-2";
-        cargaProductoDiv.innerHTML = `<div class="card" style="width: 20rem;">
+        cargaProductoDiv.innerHTML = `<div class="card" style="width: 16rem;">
                                     <img src="${producto.imagen}" class="card-img-top" alt="...">
                                     <div class="card-body">
-                                    <h5 class="card-title" style="font-size:1rem;">${producto.nombre}</h5>
+                                    <h5 class="card-title" style="font-size:0.8rem;">${producto.nombre}</h5>
                                     <p class="${producto.precio <= 2000 && "ofertaProducto"}">Precio: ${producto.precio}</p>
                                     <button id="${producto.id}" class="btn btn-primary">Agregar al carrito</button>
                                     </div>

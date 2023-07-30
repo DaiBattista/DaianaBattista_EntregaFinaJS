@@ -1,0 +1,66 @@
+[
+    {
+        "id": 1,
+        "nombre": "Super Mario Bros.™ Wonder",
+        "precio": 61539,
+        "cantidad": 1,
+        "imagen": "../img/mario_1.png"
+    },
+    {
+        "id": 2,
+        "nombre": "Super Mario Bros.™ Wonder",
+        "precio": 61539,
+        "cantidad": 1,
+        "imagen": "../img/mario_1.png"
+    },
+    {
+        "id": 3,
+        "nombre": "Mario Kart™ 8 Deluxe",
+        "precio": 34809,
+        "cantidad": 1,
+        "imagen": "../img/mario_3.png"
+    },
+    {
+        "id": 4,
+        "nombre": "Mario + Rabbids spark of hope",
+        "precio": 36999,
+        "cantidad": 1,
+        "imagen": "../img/mario_4.png"
+    },
+    {
+        "id": 5,
+        "nombre": "WarioWare™: Get It Together!",
+        "precio": 39689,
+        "cantidad": 1,
+        "imagen": "../img/mario_6.png"
+    },
+    {
+        "id": 6,
+        "nombre": "Captain Toad™: Treasure Tracker",
+        "precio": 37689,
+        "cantidad": 1,
+        "imagen": "../img/mario_5.png"
+    },
+    {
+        "id": 7,
+        "nombre": "Super Mario Party",
+        "precio": 61539,
+        "cantidad": 1,
+        "imagen": "../img/mario_7.png"
+    },
+    {
+        "id": 8,
+        "nombre": "Paper Mario™: The Origami King",
+        "precio": 61539,
+        "cantidad": 1,
+        "imagen": "../img/mario_8.png"
+    },
+    {
+        "id": 9,
+        "nombre": "Nintendo Switch",
+        "precio": 375654,
+        "cantidad": 1,
+        "imagen": "../img/mario_9.png"
+    }
+
+]

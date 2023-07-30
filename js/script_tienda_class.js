@@ -1,6 +1,6 @@
 class Producto {
     constructor(id, nombre, precio, cantidad, imagen) {
-        this.id = id,
+            this.id = id,
             this.nombre = nombre,
             this.precio = precio,
             this.cantidad = cantidad,
@@ -18,7 +18,7 @@ class Producto {
 // const producto9 = new Producto(9, "Nintendo Switch", 375654, 1, "../img/mario_9.png")
 
 const cargarProductos = async () => {
-    const res = await fetch("../pages/productos.json")
+    const res = await fetch("../js/productos.json")
     const data = await res.json()
     console.log(data)
     for(let producto of data) {

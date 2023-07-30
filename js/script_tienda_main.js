@@ -9,7 +9,6 @@ const precioTotal = document.getElementById("precioTotal");
 const botonFinalizarCompra = document.getElementById("botonFinalizarCompra");
 const productosEnCarrito = JSON.parse(localStorage.getItem("carrito")) || [];
 
-
 function verCatalogo(array) {
     console.log(productosDiv);
     productosDiv.innerHTML = ``;
@@ -76,7 +75,7 @@ function cargarProductosCarrito() {
     productosEnCarrito.forEach((p) => {
         const cardEnCarrito = document.createElement("div");
         cardEnCarrito.innerHTML = `
-                            <div class="card border-primary mb-3" id ="productoCarrito${p.id}" style="max-width: 520px;">
+                            <div class="card border-primary mb-2" id ="productoCarrito${p.id}" style="max-width: 520px;">
                     <img class="card-img-top" height="382px" src="${p.imagen}" alt="">
                     <div class="card-body">
                     <h4 class="card-title">${p.nombre}</h4>
@@ -293,6 +292,6 @@ botonCarrito.addEventListener("click", () => {
 })
 verCatalogo(productos)
 
-botonFinalizarCompra.addEventListener("click", () =>{
+botonFinalizarCompra.addEventListener("click", () => {
     finalizarCompra(productosEnCarrito)
 })

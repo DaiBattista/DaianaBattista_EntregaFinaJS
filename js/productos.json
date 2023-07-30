@@ -8,10 +8,10 @@
     },
     {
         "id": 2,
-        "nombre": "Super Mario Bros.™ Wonder",
+        "nombre": "Super Mario™ 3D World + Bowsers Fury",
         "precio": 61539,
         "cantidad": 1,
-        "imagen": "../img/mario_1.png"
+        "imagen": "../img/mario_2.png"
     },
     {
         "id": 3,

@@ -76,7 +76,7 @@ function cargarProductosCarrito() {
     productosEnCarrito.forEach((p) => {
         const cardEnCarrito = document.createElement("div");
         cardEnCarrito.innerHTML = `
-                            <div class="card border-primary mb-3" id ="productoCarrito${p.id}" style="max-width: 540px;">
+                            <div class="card border-primary mb-3" id ="productoCarrito${p.id}" style="max-width: 520px;">
                     <img class="card-img-top" height="382px" src="${p.imagen}" alt="">
                     <div class="card-body">
                     <h4 class="card-title">${p.nombre}</h4>
